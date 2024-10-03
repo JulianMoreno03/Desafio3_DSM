@@ -7,11 +7,11 @@ import retrofit2.http.*
 interface RecursoApiService {
 
     // Obtener todos los recursos
-    @GET("recursos/recurso")
+    @GET("recursos")
     fun getRecursos(): Call<List<Recurso>>
 
     // Obtener recurso por ID
-    @GET("recursos/recurso/{id}")
+    @GET("recursos/{id}")
     fun getRecursoById(@Path("id") id: Int): Call<Recurso>
 
     // Agregar un recurso

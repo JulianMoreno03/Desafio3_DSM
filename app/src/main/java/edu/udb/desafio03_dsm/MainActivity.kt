@@ -32,19 +32,18 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = recursoAdapter
 
-
         // Configurar la búsqueda
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
                     val id = it.toIntOrNull()
-                    id?.let {
-                        getRecursoById(it) // Llama al método para obtener el recurso por ID
-                    } ?: run {
+                    if (id != null) {
+                        getRecursoById(id) // Llama al método para obtener el recurso por ID
+                    } else {
                         Toast.makeText(this@MainActivity, "Por favor ingresa un ID válido.", Toast.LENGTH_SHORT).show()
                     }
                 }
-                return false
+                return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
@@ -78,8 +77,12 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Recurso>, response: Response<Recurso>) {
                 if (response.isSuccessful) {
                     val recurso = response.body()
-                    // Manejar el recurso recibido
-                    Log.d("MainActivity", "Recurso recibido: $recurso")
+                    if (recurso != null) {
+                        // Actualizar el adaptador con el recurso encontrado
+                        recursoAdapter.setRecursos(listOf(recurso)) // Aquí mostramos solo el recurso encontrado
+                    } else {
+                        Log.e("MainActivity", "Recurso no encontrado")
+                    }
                 } else {
                     Log.e("MainActivity", "Error en la respuesta al buscar por ID: ${response.errorBody()?.string()}")
                 }
@@ -90,5 +93,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
 
 }

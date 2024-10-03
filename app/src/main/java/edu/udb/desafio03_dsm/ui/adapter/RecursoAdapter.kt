@@ -1,5 +1,7 @@
 package edu.udb.desafio03_dsm.ui.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,12 +10,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import edu.udb.desafio03_dsm.R
+import edu.udb.desafio03_dsm.RecursoDetailActivity
 import edu.udb.desafio03_dsm.model.Recurso
 
 
 class RecursoAdapter(private var recursos: List<Recurso> = emptyList()) : RecyclerView.Adapter<RecursoAdapter.RecursoViewHolder>() {
     private var recursosFiltrados: List<Recurso> = recursos // Lista filtrada
-
+    private lateinit var context: Context
     class RecursoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recursoTitulo: TextView = itemView.findViewById(R.id.recursoTitulo)
         val recursoImagen: ImageView = itemView.findViewById(R.id.recursoImagen)
@@ -33,6 +36,14 @@ class RecursoAdapter(private var recursos: List<Recurso> = emptyList()) : Recycl
             .placeholder(R.drawable.ic_launcher_foreground)
             .error(R.drawable.ic_launcher_foreground) // Imagen de error si no se puede cargar
             .into(holder.recursoImagen)
+
+        // Manejar el clic en el item
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, RecursoDetailActivity::class.java).apply {
+                putExtra("recurso", recurso) // Enviar el recurso como extra
+            }
+            holder.itemView.context.startActivity(intent) // Iniciar la nueva actividad
+        }
     }
 
 
@@ -56,5 +67,6 @@ class RecursoAdapter(private var recursos: List<Recurso> = emptyList()) : Recycl
         }
         notifyDataSetChanged() // Notificar al adaptador que los datos han cambiado
     }
+
 }
 
