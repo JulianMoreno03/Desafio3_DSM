@@ -23,6 +23,6 @@ interface RecursoApiService {
     fun updateRecurso(@Path("id") id: Int, @Body recurso: Recurso): Call<Recurso>
 
     // Eliminar un recurso
-    @DELETE("recursos/recurso/{id}")
+    @DELETE("recursos/{id}")
     fun deleteRecurso(@Path("id") id: Int): Call<Void>
 }

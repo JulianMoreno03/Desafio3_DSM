@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 // Modelo de datos que traerá de la API
+
 data class Recurso(
     val id: Int,
     val titulo: String,
@@ -32,7 +33,6 @@ data class Recurso(
         parcel.writeString(imagen)
     }
 
-    // Método que describe el contenido, en este caso no se necesita
     override fun describeContents(): Int {
         return 0
     }

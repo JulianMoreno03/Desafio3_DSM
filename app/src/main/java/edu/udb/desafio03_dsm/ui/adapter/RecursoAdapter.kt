@@ -2,6 +2,7 @@ package edu.udb.desafio03_dsm.ui.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +42,9 @@ class RecursoAdapter(private var recursos: List<Recurso> = emptyList()) : Recycl
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, RecursoDetailActivity::class.java).apply {
                 putExtra("recurso", recurso) // Enviar el recurso como extra
+
             }
+            Log.d("RecursoAdapter", "ID del recurso enviado: ${recurso.id}") // Log del ID
             holder.itemView.context.startActivity(intent) // Iniciar la nueva actividad
         }
     }
