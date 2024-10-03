@@ -15,11 +15,11 @@ interface RecursoApiService {
     fun getRecursoById(@Path("id") id: Int): Call<Recurso>
 
     // Agregar un recurso
-    @POST("recursos/recurso")
+    @POST("recursos/")
     fun addRecurso(@Body recurso: Recurso): Call<Recurso>
 
     // Modificar un recurso
-    @PUT("recursos/recurso/{id}")
+    @PUT("recursos/{id}")
     fun updateRecurso(@Path("id") id: Int, @Body recurso: Recurso): Call<Recurso>
 
     // Eliminar un recurso

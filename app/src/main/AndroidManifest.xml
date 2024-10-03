@@ -17,6 +17,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ModificarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddRecursoActivity"
+            android:exported="false" />
+        <activity
             android:name=".RecursoDetailActivity"
             android:exported="false" />
         <activity

@@ -1,0 +1,46 @@
+<!-- activity_modificar_recurso.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/bg">
+
+    <EditText
+        android:id="@+id/editTextTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Título"
+        android:textColor="@color/white"
+        />
+
+    <EditText
+        android:id="@+id/editTextDescripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción"
+        android:textColor="@color/white"/>
+
+    <EditText
+        android:id="@+id/editTextEnlace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enlace"
+        android:textColor="@color/white"/>
+
+    <EditText
+        android:id="@+id/editTextImagen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="URL de la Imagen"
+        android:textColor="@color/white"/>
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:text="Guardar"
+        android:textColor="@color/white" />
+</LinearLayout>

@@ -1,5 +1,6 @@
 package edu.udb.desafio03_dsm
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -24,6 +25,7 @@ class RecursoDetailActivity : AppCompatActivity() {
     private lateinit var recursoImagen: ImageView
     private lateinit var recursoEnlace: TextView
     private lateinit var btnEliminar: Button
+    private lateinit var btnModificar: Button
     private var recurso: Recurso? = null // Variable para almacenar el recurso
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +39,7 @@ class RecursoDetailActivity : AppCompatActivity() {
         recursoEnlace = findViewById(R.id.recursoEnlace)
         recursoImagen = findViewById(R.id.recursoImagen)
         btnEliminar = findViewById(R.id.btnEliminar)
-
+        btnModificar = findViewById(R.id.btnModificar)
         // Obtener el recurso pasado desde el Intent
         recurso = intent.getParcelableExtra("recurso")
 
@@ -60,6 +62,14 @@ class RecursoDetailActivity : AppCompatActivity() {
         btnEliminar.setOnClickListener {
             recurso?.let {
                 eliminarRecurso(it.id) // Llama a la función para eliminar el recurso
+            }
+        }
+
+        btnModificar.setOnClickListener {
+            recurso?.let {
+                val intent = Intent(this, ModificarActivity::class.java)
+                intent.putExtra("recurso", it) // Pasar el recurso a la nueva actividad
+                startActivity(intent)
             }
         }
     }
@@ -86,6 +96,8 @@ class RecursoDetailActivity : AppCompatActivity() {
             }
         })
     }
+
+    //en este caso luego de eliminar o modificar volvemos a llamar a todos los recursos "actualizados"
     private fun getRecursos() {
         RetrofitInstance.api.getRecursos().enqueue(object : Callback<List<Recurso>> {
             override fun onResponse(call: Call<List<Recurso>>, response: Response<List<Recurso>>) {

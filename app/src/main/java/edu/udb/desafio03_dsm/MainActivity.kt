@@ -1,7 +1,9 @@
 package edu.udb.desafio03_dsm
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recursoAdapter: RecursoAdapter
     private lateinit var recursos: List<Recurso>
     private lateinit var searchView: SearchView
-
+    private lateinit var btnNuevoRecurso: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         recursoAdapter = RecursoAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = recursoAdapter
-
+        btnNuevoRecurso = findViewById(R.id.btnNuevoRecurso)
         // Configurar la búsqueda
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -53,6 +55,14 @@ class MainActivity : AppCompatActivity() {
         })
 
         getRecursos() // Llama a la función para obtener todos los recursos
+
+
+        // Configurar el evento para el botón de nuevo recurso
+        btnNuevoRecurso.setOnClickListener {
+            val intent = Intent(this, AddRecursoActivity::class.java)
+            startActivity(intent)  // Inicia la nueva actividad
+        }
+
     }
     private fun getRecursos() {
         RetrofitInstance.api.getRecursos().enqueue(object : Callback<List<Recurso>> {
